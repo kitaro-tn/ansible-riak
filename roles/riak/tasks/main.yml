@@ -1,0 +1,20 @@
+---
+- name: install pygpgme
+  package: name=pygpgme state=latest
+
+- name: attach basho riak repos
+  copy: src=basho.repo dest=/etc/yum.repos.d/
+
+- name: install riak rpm
+  yum: name=http://yum.basho.com/gpg/basho-release-6-1.noarch.rpm state=present
+
+- name: install riak
+  yum: name=riak state=latest
+
+# - name: install riak dependencies
+#   package: name={{ item }} state=latest
+#   with_items:
+#     - gcc
+#     - gcc-c++
+#     - make
+#     - pam-devel
